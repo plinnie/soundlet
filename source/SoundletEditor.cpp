@@ -46,7 +46,7 @@ SoundletEditor::SoundletEditor(SoundletProcessor& p)
         max_f = max_f / 2;
 
         _detailLabel[i].setText(fR, juce::NotificationType::dontSendNotification);
-        _detailLabel[i].setFont(_detailLabel[i].getFont().withHeight(10));
+        _detailLabel[i].setFont(_detailLabel[i].getFont().withHeight(12));
         _detailLabel[i].setSize(64, 32);
         _detailLabel[i].setJustificationType(juce::Justification::centredRight);
         _gainPanel.addComponent(&_detailLabel[i], i == 0 ? 0 : -4, i == 0 ? 0 : 2, true);
@@ -61,7 +61,7 @@ SoundletEditor::SoundletEditor(SoundletProcessor& p)
 
     fR = juce::String::formatted("%.1f Hz", max_f*0.75); 
     _lowApproxLabel.setText(fR, juce::NotificationType::dontSendNotification);
-    _lowApproxLabel.setFont(_lowApproxLabel.getFont().withHeight(10));
+    _lowApproxLabel.setFont(_lowApproxLabel.getFont().withHeight(12));
     _lowApproxLabel.setSize(64, 32);
     _lowApproxLabel.setJustificationType(juce::Justification::centredRight);
     _gainPanel.addComponent(&_lowApproxLabel, -4, 2, true);

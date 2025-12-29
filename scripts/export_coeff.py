@@ -1,11 +1,18 @@
 import pywt
 import sys
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 
 import matplotlib as mpl
-mpl.font_manager._rebuild()
+import matplotlib.font_manager as font_manager
+
+font_dir = (Path(__file__).parent.parent / "coolgui" / "res").absolute()
+
+font_file = font_dir / "PastiRegular.otf"
+
+font_manager.fontManager.addfont(str(font_file))
+
 
 HDR_FILE_TEMPLATE="""\
 /*
@@ -92,14 +99,15 @@ def fig2img(fig):
     buf.seek(0)
     img = Image.open(buf)
     return img
-def wavelet_to_image(wl):
+
+def wavelet_to_image(wl, w=2.0, h=0.6, with_name=True):
     waves = wl.wavefun(8)
 
     DARK_BLUE = "#003566"
     LITE_BLUE ="#0080c4"
 
     fig, axs = plt.subplots(1, 4, facecolor=DARK_BLUE)
-    fig.set_size_inches(2, 0.6)
+    fig.set_size_inches(w, h)
 
     if len(waves) == 5:
         shapes = (
@@ -122,15 +130,33 @@ def wavelet_to_image(wl):
     plt.tight_layout(pad=0, w_pad=0, h_pad=0)
     plt.subplots_adjust(top=0.75, left=0.02, right=0.98, bottom=0.1)
 
-    sfnlen = len(wl.short_family_name)
-    if len(wl.name) > sfnlen:
-        number = wl.name[sfnlen:]
-        s = f"{wl.family_name} {number}"
-    else:
-        s = f"{wl.family_name}"
+    if wl.family_name.lower() == "daubechies" and wl.number == 2:
+        print("Saving banner file")
+        plt.savefig("banner.pdf")
 
-    plt.figtext(0.02, 0.95 , s, va='top', color='white', alpha=0.8, fontdict={"family" : "PASTI", "size": 8})
     img = fig2img(fig)
+
+    if with_name:
+        sfnlen = len(wl.short_family_name)
+        if len(wl.name) > sfnlen:
+            number = wl.name[sfnlen:]
+            s = f"{wl.family_name} {number}"
+        else:
+            s = f"{wl.family_name}"
+        # Yes, this could have been done with matplotlib, however
+        # somehow the loaded font would not render properly on my
+        # machine. As such we do it partially in PIL.
+
+        txt = Image.new("RGBA", img.size, (0, 0, 0, 0))
+
+        font = ImageFont.truetype(font=font_file, size=12)
+
+        d = ImageDraw.Draw(txt)
+
+        d.text(xy=(2, 2), text=s, fill=(255, 255, 255, 192), font=font)
+
+        img = Image.alpha_composite(img, txt)
+
     #img.show()
 #    sys.exit(0)
     plt.close(fig)

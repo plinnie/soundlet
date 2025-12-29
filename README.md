@@ -1,55 +1,24 @@
-![PAMPLEJUCE](assets/images/pamplejuce.png)
-[![](https://github.com/sudara/pamplejuce/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/sudara/pamplejuce/actions)
+![Soundlet](assets/images/banner.png)<br/>
+**Wavelet based parametric equalizer**
 
-Pamplejuce is a ~~template~~ lifestyle for creating and building JUCE plugins in 2025.
+Soundlet is a wavelet based parametric equalizer. Why? Because we can!
 
-Out-of-the-box, it:
 
-1. Supports C++20.
-2. Uses JUCE 8.x as a git submodule (tracking develop).
-3. Uses CPM for dependency management.
-3. Relies on CMake 3.25 and higher for cross-platform building.
-4. Has [Catch2](https://github.com/catchorg/Catch2) v3.7.1 for the test framework and runner.
-5. Includes a `Tests` target and a `Benchmarks` target with examples to get started quickly.
-6. Has [Melatonin Inspector](https://github.com/sudara/melatonin_inspector) installed as a JUCE module to help relieve headaches when building plugin UI.
+## What are wavelets?
 
-It also has integration with GitHub Actions, specifically:
+Wavelets are a way to decompose (and reconstruct) a signal into different freqeuncy components. Wavelets are more often used in image processing, but can be applied to audio signals as well. In comparison to a normal parametric equalizer, wavelets do not split into clear frequency bins. 
 
-1. Building and testing cross-platform (linux, macOS, Windows) binaries
-2. Running tests and benchmarks in CI
-3. Running [pluginval](http://github.com/tracktion/pluginval) 1.x against the binaries for plugin validation
-4. Config for [installing Intel IPP](https://www.intel.com/content/www/us/en/developer/tools/oneapi/ipp.html)
-5. [Code signing and notarization on macOS](https://melatonin.dev/blog/how-to-code-sign-and-notarize-macos-audio-plugins-in-ci/)
-6. [Windows code signing via Azure Trusted Signing](https://melatonin.dev/blog/code-signing-on-windows-with-azure-trusted-signing/)
+## How does soundlet work?
 
-It also contains:
+Soundlet uses different wavelet filter banks (i.e. 'frequencie bands') and applies a different gain per bank. The wavelet to apply is user selectable.
 
-1. A `.gitignore` for all platforms.
-2. A `.clang-format` file for keeping code tidy.
-3. A `VERSION` file that will propagate through JUCE and your app.
-4. A ton of useful comments and options around the CMake config.
+![Screenshot](assets/images/screenshot.png)
 
-## How does this all work at a high level?
+Note that soundlet is limited to power-of-two divisions of your sample rate. Thus when outputing 44.1 kilo-samples-per-second, the first bin runs from 22050 Hz to 11025 Hz (having a center frequencty of 16537.5 Hz). The second bin goes from 11026 to 5513 Hz, etc...
 
-Check out the [official Pamplejuce documentation](https://melatonin.dev/manuals/pamplejuce/how-does-this-all-work/).
+Each filter bank has its own sample rate. Normally Soundlet adds delays to the specific filter banks to compensate for the lower sample rate of the lower banks. However, unchecking 'sync filters' will remove this delay. 
 
-[![Arc - 2024-10-01 51@2x](https://github.com/user-attachments/assets/01d19d2d-fbac-481f-8cec-e9325b2abe57)](https://melatonin.dev/manuals/pamplejuce/how-does-this-all-work/)
+## FAQ
 
-## Setting up for YOUR project
-
-This is a template repo!
-
-That means you can click "[Use this template](https://github.com/sudara/pamplejuce/generate)" here or at the top of the page to get your own copy (not fork) of the repo. Then you can make it private or keep it public, up to you.
-
-Then check out the [documentation](https://melatonin.dev/manuals/pamplejuce/setting-your-project-up/) so you know what to tweak. 
-
-> [!NOTE]
-> Tests will immediately run and fail (go red) until you [set up code signing](https://melatonin.dev/manuals/pamplejuce/getting-started/code-signing/).
-
-## Having Issues?
-
-Thanks to everyone who has contributed to the repository. 
-
-This repository covers a _lot_ of ground. JUCE itself has a lot of surface area. It's a group effort to maintain the garden and keep things nice!
-
-If something isn't just working out of the box — *it's probably not just you* — others are running into the problem, too, I promise. Check out [the official docs](https://melatonin.dev/manuals/pamplejuce), then please do [open an issue](https://github.com/sudara/pamplejuce/issues/new)!
+**Q.** Could you not just use JUCE convolution?<br/>
+**A.** Probably, but I wanted to make my own processing.

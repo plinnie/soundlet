@@ -16,7 +16,7 @@ set(PRODUCT_NAME "Soundlet")
 
 set(COMPANY_NAME "Plinsoft")
 
-set(BUNDLE_ID "org.duckdns.beveren.soundlet")
+set(BUNDLE_ID "beveren.soundlet")
 
 set(FORMATS Standalone AU VST3 AUv3)
 
