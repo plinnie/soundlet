@@ -32,7 +32,6 @@ Each filter bank has its own sample rate. Normally Soundlet adds delays to the s
 
 (borrowed from [free sound](https://freesound.org/people/sepal/sounds/96481/))
 
-## FAQ
+## Software Status
 
-**Q.** Could you not just use JUCE convolution?<br/>
-**A.** Probably, but I wanted to make my own processing.
+Currently this version of the software is an experimental pre-release. It is not yet finished software. It may crash or have unexpected behavior.
