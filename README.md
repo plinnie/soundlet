@@ -10,7 +10,11 @@ Wavelets are a way to decompose (and reconstruct) a signal into different freqeu
 
 ## How does soundlet work?
 
-Soundlet uses different wavelet filter banks (i.e. 'frequencie bands') and applies a different gain per bank. The wavelet to apply is user selectable.
+Soundlet uses different wavelet filter banks (i.e. 'frequencie bands') and applies a different gain per bank. The wavelet to apply is user selectable. 
+
+> [!CAUTION]
+> Some wavelets are very senstive to gain changes. For this reason Soundlet clips at +10 dB. 
+> Still do not put the volume to loud when playing with different wavelets.
 
 ![Screenshot](assets/images/screenshot.png)
 
@@ -22,13 +26,13 @@ Each filter bank has its own sample rate. Normally Soundlet adds delays to the s
 
 **No Ordinary Morning - Chicane**
 
-* ![Example 1](assets/example1.flac) 
-* ![Original 1](assets/original1.flac)
+* ![Example 1](https://github.com/plinnie/soundlet/raw/refs/heads/main/assets/example1.flac) 
+* ![Original 1](https://github.com/plinnie/soundlet/raw/refs/heads/main/assets/original1.flac)
 
 **Guitar loop**
 
-* ![Example 2](assets/example2.flac) 
-* ![Original 2](assets/original2.flac)
+* ![Example 2](https://github.com/plinnie/soundlet/raw/refs/heads/main/assets/example2.flac) 
+* ![Original 2](https://github.com/plinnie/soundlet/raw/refs/heads/main/assets/original2.flac)
 
 (borrowed from [free sound](https://freesound.org/people/sepal/sounds/96481/))
 
