@@ -18,6 +18,20 @@ Note that soundlet is limited to power-of-two divisions of your sample rate. Thu
 
 Each filter bank has its own sample rate. Normally Soundlet adds delays to the specific filter banks to compensate for the lower sample rate of the lower banks. However, unchecking 'sync filters' will remove this delay. 
 
+## How does it sound?
+
+**No Ordinary Morning - Chicane**
+
+* ![Example 1](assets/example1.flac) 
+* ![Original 1](assets/original1.flac)
+
+**Guitar loop**
+
+* ![Example 2](assets/example2.flac) 
+* ![Original 2](assets/original2.flac)
+
+(borrowed from [free sound](https://freesound.org/people/sepal/sounds/96481/))
+
 ## FAQ
 
 **Q.** Could you not just use JUCE convolution?<br/>
