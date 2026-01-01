@@ -38,4 +38,4 @@ Each filter bank has its own sample rate. Normally Soundlet adds delays to the s
 
 ## Software Status
 
-Currently this version of the software is an experimental pre-release. It is not yet finished software. It may crash or have unexpected behavior.
+Removed first pre-release because of buffer issues outside of my besting environment. Stay tuned for a new release with these issues fixed. 
