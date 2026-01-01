@@ -38,4 +38,4 @@ Each filter bank has its own sample rate. Normally Soundlet adds delays to the s
 
 ## Software Status
 
-Removed first pre-release because of buffer issues outside of my besting environment. Stay tuned for a new release with these issues fixed. 
+Removed first pre-release because of buffer issues outside of my testing environment. Stay tuned for a new release with these issues fixed. 
